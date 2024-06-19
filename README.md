@@ -41,4 +41,7 @@ Generate synthetic data:
 ```
 python generate_synthetic_data.py
 ```
- 
+ 4. Developing a GEMINI's GEN AI Bot for JS projects and
+    ```
+    node playground.js
+    ```

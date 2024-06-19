@@ -21,3 +21,24 @@ Welcome to the Health: Pioneering Personalized Medicine with GEN AI project! Our
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/your-username/Health-Pioneering-Personalized-Medicine-with-GEN-AI.git
+
+
+2. **Install the required libraries:**
+ ```bash
+    pip install tensorflow rasa dialogflow
+```
+3. Run the scripts sequentially:
+
+Data preprocessing:
+```
+python data_preprocessing.py
+```
+Train the DGM model:
+```
+python train_dgm_model.py
+```
+Generate synthetic data:
+```
+python generate_synthetic_data.py
+```
+ 

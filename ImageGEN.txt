@@ -1,0 +1,6 @@
+To use this code(ImageGen.js), create a .env file with:
+
+ ```
+GOOGLE_GEN_AI_API_KEY=your_api_key_here
+
+ ```

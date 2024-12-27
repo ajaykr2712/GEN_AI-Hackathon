@@ -3,42 +3,42 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-async function initializeGenAI() {
-    try {
-        const apiKey = process.env.GOOGLE_GEN_AI_API_KEY;
+const MODEL_NAME = "gemini-1.5-pro";
+
+class AIContentGenerator {
+    constructor(apiKey) {
         if (!apiKey) {
             throw new Error("API Key not found. Please set the GOOGLE_GEN_AI_API_KEY environment variable.");
         }
-        return new GoogleGenerativeAI(apiKey);
-    } catch (error) {
-        console.error("Failed to initialize Google Generative AI:", error);
-        throw error;
+        this.genAI = new GoogleGenerativeAI(apiKey);
     }
-}
 
-async function getGenerativeModel(genAi, modelName) {
-    try {
-        return genAi.getGenerativeModel({ model: modelName });
-    } catch (error) {
-        console.error("Failed to get generative model:", error);
-        throw error;
-    }
-}
+    async generateContent(prompt) {
+        try {
+            const model = this.genAI.getGenerativeModel({ model: MODEL_NAME });
+            const response = await model.generateContent(prompt);
+            
+            if (!response?.response?.text) {
+                throw new Error("Invalid response format");
+            }
 
-async function generateContent() {
-    try {
-        const genAi = await initializeGenAI();
-        const model = await getGenerativeModel(genAi, "gemini-1.5-pro");
-        const response = await model.generateContent("Generate a code for Palindrome Number in solidity language");
-        
-        if (response && response.response && response.response.text) {
-            console.log(response.response.text());
-        } else {
-            console.error("Invalid response format:", response);
+            return response.response.text();
+        } catch (error) {
+            throw new Error(`Content generation failed: ${error.message}`);
         }
-    } catch (error) {
-        console.error("Failed to generate content:", error);
     }
 }
 
-generateContent();
+async function main() {
+    try {
+        const generator = new AIContentGenerator(process.env.GOOGLE_GEN_AI_API_KEY);
+        const prompt = "Generate a code for Palindrome Number in solidity language";
+        const content = await generator.generateContent(prompt);
+        console.log(content);
+    } catch (error) {
+        console.error("Error:", error.message);
+        process.exit(1);
+    }
+}
+
+main();

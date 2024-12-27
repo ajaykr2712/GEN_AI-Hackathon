@@ -1,0 +1,18 @@
+Key improvements made:
+    
+
+Class-based Structure: Created an AIContentGenerator class to better organize the code and maintain state.
+
+Single Responsibility: Each method has a clear, single responsibility.
+
+Constant Definition: Moved the model name to a constant for easy modification.
+
+Simplified Error Handling: More concise error handling with meaningful messages.
+
+Reduced Nesting: Eliminated unnecessary nested try-catch blocks.
+
+Better Null Checking: Used optional chaining (?.) for cleaner null checks.
+
+Initialization Optimization: Combined initialization steps into the constructor.
+
+Process Exit: Added process.exit(1) for proper error handling in production.
